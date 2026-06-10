@@ -37,11 +37,13 @@ export function ProductCard({ product }: { product: Product }) {
   // hover — image scale + actions fade up
   function handleMouseEnter() {
     gsap.to(imageRef.current, {
+      visibility: "visible",
       scale: 1.06,
       duration: 0.5,
       ease: "power2.out",
     });
     gsap.to(actionsRef.current, {
+      visibility: "visible",
       opacity: 1,
       y: 0,
       duration: 0.25,
@@ -130,7 +132,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div
           ref={actionsRef}
           className="absolute bottom-3 inset-x-3 flex gap-2 opacity-0 translate-y-2 invisible"
-          style={{ transform: "translateY(8px)", visibility: "visible" }}
+          style={{ transform: "translateY(8px)" }}
         >
           <Button
             onClick={handleAddToCart}

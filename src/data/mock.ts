@@ -1,7 +1,7 @@
 import { FAQ, Product, Review } from "@/types";
 
 // DELAY TIME
-export const DELAY = 3000; // 3 seconds
+export const DELAY = 600; // 600ms
 
 // Products
 

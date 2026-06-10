@@ -137,10 +137,35 @@ function Nav({
   );
 }
 
+// at the top of Header.tsx, add this component
+function PromoBanner({ onDismiss }: { onDismiss: () => void }) {
+  return (
+    <div className="bg-accent text-white text-xs text-center py-2.5 px-4 relative">
+      <span>
+        Free shipping on orders over <strong>$75</strong> — limited time.{" "}
+        <Link
+          href="#products"
+          className="underline underline-offset-2 font-medium hover:opacity-80 transition-opacity"
+        >
+          Shop now
+        </Link>
+      </span>
+      <Button
+        onClick={onDismiss}
+        aria-label="Dismiss banner"
+        className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:opacity-70 transition-opacity cursor-pointer"
+      >
+        <X size={13} />
+      </Button>
+    </div>
+  );
+}
+
 export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
 
   // entrance animation — whole header drops in together
   useEffect(() => {
@@ -161,6 +186,7 @@ export default function Header() {
   return (
     <>
       <header ref={headerRef} className="fixed top-0 inset-x-0 z-50">
+        {showBanner && <PromoBanner onDismiss={() => setShowBanner(false)} />}
         <Nav
           scrolled={scrolled}
           mobileOpen={mobileOpen}

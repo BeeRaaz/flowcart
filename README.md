@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FlowCart
 
-## Getting Started
+A responsive e-commerce landing page built for the Yatri Motorcycles Frontend Engineer assessment.
 
-First, run the development server:
+**Live demo:** [flowcart.vercel.app](https://flowcart.vercel.app)  
+**Stack:** Next.js 16 · TypeScript · Tailwind CSS v4 · GSAP · TanStack Query · Zustand
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+---
+
+## Setup
+
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/BeeRaaz/flowcart.git
+cd flowcart
+
+# Install dependencies
+pnpm install
+
+# Start the development server
 pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> Requires Node.js 18+ and pnpm. Install pnpm with `npm i -g pnpm` if needed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## GSAP usage
 
-To learn more about Next.js, take a look at the following resources:
+| Component | Animation |
+|-----------|-----------|
+| `Header` | Full header drops in on load |
+| `Hero` | Background image scale + text/CTA stagger on load |
+| `FeaturedProducts` | Scroll-triggered card reveal with stagger (ScrollTrigger) |
+| `ProductCard` | Image scale + action overlay fade on hover |
+| `QuickViewModal` | Scale + fade on open, reverse on close |
+| `CartDrawer` | Slides in from right on open, out on close |
+| `FAQ` | Height + opacity tween on accordion expand/collapse |
+| `Testimonials` | Scroll-triggered stagger reveal |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## TanStack Query usage
 
-## Deploy on Vercel
+| Hook | Endpoint | Used in | Stale time |
+|------|----------|---------|------------|
+| `useProducts` | `/api/products` | `FeaturedProducts` | 5 min |
+| `useFAQs` | `/api/faqs` | `FAQ` | 5 min |
+| `useReviews` | `/api/reviews` | `Testimonials` | 5 min |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All endpoints simulate 600ms network latency so loading skeletons are visible on first load.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## State management
+
+| Store | What it manages | Persisted |
+|-------|----------------|-----------|
+| `useCartStore` | Cart items, quantities, totals, drawer open state | Yes — localStorage |
+| `useQuickViewStore` | Active product, modal open state | No |
+| `useWishlistStore` | Wishlisted product IDs | Yes — localStorage |
+
+Cart and wishlist survive page refresh via Zustand `persist` middleware.
+
+---
+
+## Design decision I'm proud of
+
+FlowCart is positioned as an editorial lifestyle brand rather than a generic e-commerce template. The typography pairs Playfair Display (serif) for headings with Inter for body copy, creating an intentional editorial feel. The accent color runs consistently through badges, CTAs, the promo banner, and hover states to build a coherent brand identity. Products and testimonials use TanStack Query loading skeletons that transition into scroll-triggered GSAP stagger animations, giving the page a layered, purposeful feel. The dark footer anchors the page and creates natural visual closure against the warm off-white background.
+
+---
+
+## What I'd improve with more time
+
+Add product detail pages (`/products/[slug]`) with full image galleries and related products. Implement optimistic UI on cart mutations. Replace mock API routes with a real database (Supabase) and add authentication for the dashboard page. Add tests for critical flows like checkout.

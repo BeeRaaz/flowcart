@@ -11,6 +11,6 @@ export function useReviews() {
   return useQuery({
     queryKey: ["reviews"],
     queryFn: fetchReviews,
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 5,
   });
 }
