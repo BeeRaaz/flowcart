@@ -35,7 +35,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="min-h-[92vh] flex items-center bg-background pt-20">
+    <section className="min-h-screen flex items-center bg-background pt-28">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — copy */}
