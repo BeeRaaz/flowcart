@@ -2,7 +2,7 @@
 
 A responsive e-commerce landing page built for the Yatri Motorcycles Frontend Engineer assessment.
 
-**Live demo:** [flowcart.vercel.app](https://flowcart.vercel.app)  
+**Live demo:** [flowcart-self.vercel.app](https://flowcart-self.vercel.app/)  
 **Stack:** Next.js 16 · TypeScript · Tailwind CSS v4 · GSAP · TanStack Query · Zustand
 
 ---
